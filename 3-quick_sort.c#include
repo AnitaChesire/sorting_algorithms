@@ -1,0 +1,158 @@
+wap - swap the positions of two elements in an array
+ * @array: array
+ * @item1: index of the first element
+ * @item2: index of the second element
+ */
+void swap(int *array, ssize_t item1, ssize_t item2)
+{
+    int tmp = array[item1];
+    array[item1] = array[item2];
+    array[item2] = tmp;
+}
+
+/**
+ * lomuto_partition - Lomuto partition sorting scheme implementation
+ * @array: array
+ * @first: index of the first element
+ * @last: index of the last element
+ * @size: size of the array
+ * Return: return the position of the last element sorted
+ */
+int lomuto_partition(int *array, ssize_t first, ssize_t last, size_t size)
+{
+    int pivot = array[last];
+    ssize_t current = first;
+
+    for (ssize_t finder = first; finder < last; finder++)
+    {
+        if (array[finder] < pivot)
+        {
+            if (current != finder)
+            {
+                swap(array, current, finder);
+                print_array(array, size);
+            }
+            current++;
+        }
+    }
+
+    if (current != last)
+    {
+        swap(array, current, last);
+        print_array(array, size);
+    }
+
+    return (current);
+}
+
+/**
+ * quicksort_recursive - recursive helper function for quicksort
+ * @array: array
+ * @first: index of the first element
+ * @last: index of the last element
+ * @size: size of the array
+ */
+void quicksort_recursive(int *array, ssize_t first, ssize_t last, size_t size)
+{
+    if (first < last)
+    {
+        ssize_t position = lomuto_partition(array, first, last, size);
+
+        quicksort_recursive(array, first, position - 1, size);
+        quicksort_recursive(array, position + 1, last, size);
+    }
+}
+
+/**
+ * quick_sort - prepare the terrain for the quicksort algorithm
+ * @array: array
+ * @size: size of the array
+ */
+void quick_sort(int *array, size_t size)
+{
+    if (!array || size < 2)
+        return;
+
+    quicksort_recursive(array, 0, size - 1, size);
+}
+#include "sort.h"
+
+/**
+ * swap - swap the positions of two elements in an array
+ * @array: array
+ * @item1: index of the first element
+ * @item2: index of the second element
+ */
+void swap(int *array, ssize_t item1, ssize_t item2)
+{
+    int tmp = array[item1];
+    array[item1] = array[item2];
+    array[item2] = tmp;
+}
+
+/**
+ * lomuto_partition - Lomuto partition sorting scheme implementation
+ * @array: array
+ * @first: index of the first element
+ * @last: index of the last element
+ * @size: size of the array
+ * Return: return the position of the last element sorted
+ */
+int lomuto_partition(int *array, ssize_t first, ssize_t last, size_t size)
+{
+    int pivot = array[last];
+    ssize_t current = first;
+
+    for (ssize_t finder = first; finder < last; finder++)
+    {
+        if (array[finder] < pivot)
+        {
+            if (current != finder)
+            {
+                swap(array, current, finder);
+                print_array(array, size);
+            }
+            current++;
+        }
+    }
+
+    if (current != last)
+    {
+        swap(array, current, last);
+        print_array(array, size);
+    }
+
+    return (current);
+}
+
+/**
+ * quicksort_recursive - recursive helper function for quicksort
+ * @array: array
+ * @first: index of the first element
+ * @last: index of the last element
+ * @size: size of the array
+ */
+void quicksort_recursive(int *array, ssize_t first, ssize_t last, size_t size)
+{
+    if (first < last)
+    {
+        ssize_t position = lomuto_partition(array, first, last, size);
+
+        quicksort_recursive(array, first, position - 1, size);
+        quicksort_recursive(array, position + 1, last, size);
+    }
+}
+
+/**
+ * quick_sort - prepare the terrain for the quicksort algorithm
+ * @array: array
+ * @size: size of the array
+ */
+void quick_sort(int *array, size_t size)
+{
+    if (!array || size < 2)
+        return;
+
+    quicksort_recursive(array, 0, size - 1, size);
+}
+
